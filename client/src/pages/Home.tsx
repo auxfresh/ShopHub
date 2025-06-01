@@ -247,64 +247,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-4">AliMart</h3>
-              <p className="text-gray-400 text-sm">
-                Your trusted global marketplace for quality products at unbeatable prices.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Customer Service</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>Help Center</li>
-                <li>Returns & Refunds</li>
-                <li>Shipping Info</li>
-                <li>Contact Us</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Categories</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                {categoriesQuery.data?.slice(0, 4).map((category: Category) => (
-                  <li key={category.id}>
-                    <button 
-                      onClick={() => setLocation(`/?category=${category.slug}`)}
-                      className="hover:text-white transition-colors"
-                    >
-                      {category.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Sell on AliMart</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>
-                  <button 
-                    onClick={() => setLocation("/seller")}
-                    className="hover:text-white transition-colors"
-                  >
-                    Start Selling
-                  </button>
-                </li>
-                <li>Seller Center</li>
-                <li>Seller Protection</li>
-                <li>Fees & Charges</li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2024 AliMart. All rights reserved. | Privacy Policy | Terms of Service</p>
-          </div>
-        </div>
-      </footer>
-
       <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} />
       <BottomNavigation onCartOpen={() => setCartOpen(true)} />
     </div>
