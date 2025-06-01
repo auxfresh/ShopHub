@@ -173,7 +173,7 @@
 
 /* Enhanced button styles */
 .btn-ali-primary {
-  @apply bg-gradient-to-r from-ali-orange to-ali-orange-dark text-white hover:from-ali-orange-dark hover:to-ali-orange shadow-lg hover:shadow-xl focus:ring-2 focus:ring-ali-orange focus:ring-offset-2 transition-all duration-300 transform hover:scale-105;
+  @apply bg-ali-orange text-white hover:bg-ali-orange-dark shadow-lg hover:shadow-xl focus:ring-2 focus:ring-ali-orange focus:ring-offset-2 transition-all duration-300 transform hover:scale-105;
 }
 
 .btn-ali-secondary {
@@ -192,6 +192,16 @@
 /* Gradient backgrounds */
 .bg-gradient-primary {
   background: linear-gradient(135deg, hsl(var(--ali-orange)) 0%, hsl(var(--ali-orange-dark)) 100%);
+}
+
+.from-ali-orange {
+  --tw-gradient-from: hsl(var(--ali-orange));
+  --tw-gradient-to: hsl(var(--ali-orange) / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-ali-orange-dark {
+  --tw-gradient-to: hsl(var(--ali-orange-dark));
 }
 
 .bg-gradient-light {
