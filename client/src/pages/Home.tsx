@@ -32,11 +32,11 @@ export default function Home() {
     const urlParams = new URLSearchParams(location.split("?")[1] || "");
     const category = urlParams.get("category");
     const search = urlParams.get("search");
-    
+
     if (search) {
       setSearchQuery(search);
     }
-    
+
     if (category) {
       // Find category ID by slug
       categoriesQuery.data?.forEach((cat: Category) => {
@@ -57,7 +57,7 @@ export default function Home() {
     queryKey: ["/api/products", filters, searchQuery],
     queryFn: async () => {
       const params = new URLSearchParams();
-      
+
       if (filters.categoryId) params.append("categoryId", filters.categoryId.toString());
       if (searchQuery) params.append("search", searchQuery);
       if (filters.minPrice) params.append("minPrice", filters.minPrice);
@@ -67,7 +67,7 @@ export default function Home() {
       }
       params.append("limit", filters.limit.toString());
       params.append("offset", filters.offset.toString());
-      
+
       const response = await fetch(`/api/products?${params}`);
       if (!response.ok) {
         throw new Error("Failed to fetch products");

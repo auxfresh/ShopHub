@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Search, ShoppingCart, Heart, User, Menu, X } from "lucide-react";
+import { Search, ShoppingCart, Heart, User, Menu, X, Settings, Store, LogOut } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -64,7 +64,7 @@ export function Header({ onCartOpen, searchQuery, onSearchChange }: HeaderProps)
             <Link href="/">
               <h1 className="text-2xl font-bold text-ali-orange cursor-pointer">AliMart</h1>
             </Link>
-            
+
             {/* Desktop Categories */}
             <div className="hidden md:flex items-center space-x-6 ml-8">
               <DropdownMenu>

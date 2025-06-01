@@ -22,7 +22,7 @@ export function ProductCard({ product, onProductClick }: ProductCardProps) {
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    
+
     if (!firebaseUser) {
       setLocation("/auth");
       return;
@@ -38,7 +38,7 @@ export function ProductCard({ product, onProductClick }: ProductCardProps) {
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
-    
+
     if (!firebaseUser) {
       setLocation("/auth");
       return;
@@ -64,7 +64,7 @@ export function ProductCard({ product, onProductClick }: ProductCardProps) {
     const numRating = parseFloat(rating);
     const fullStars = Math.floor(numRating);
     const hasHalfStar = numRating % 1 >= 0.5;
-    
+
     return (
       <div className="flex items-center">
         {[...Array(5)].map((_, i) => (
@@ -84,67 +84,85 @@ export function ProductCard({ product, onProductClick }: ProductCardProps) {
   };
 
   return (
-    <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300 overflow-hidden">
-      <div className="relative overflow-hidden" onClick={handleProductClick}>
+    <Card className="card-enhanced group">
+      <div className="aspect-square relative overflow-hidden">
         <img
-          src={product.images[0]}
+          src={product.images?.[0] || "/placeholder.svg"}
           alt={product.name}
-          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
-        
-        {/* Badges */}
-        <div className="absolute top-2 left-2 flex flex-col gap-1">
-          {discountPercentage > 0 && (
-            <Badge className="bg-red-500 text-white text-xs px-2 py-1">
-              -{discountPercentage}%
-            </Badge>
-          )}
-          {product.isFeatured && (
-            <Badge className="bg-green-500 text-white text-xs px-2 py-1">
-              Featured
-            </Badge>
-          )}
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-        {/* Wishlist Button */}
         <Button
           variant="ghost"
-          size="sm"
-          className="absolute top-2 right-2 p-1 h-8 w-8 bg-white/80 hover:bg-white"
+          size="icon"
+          className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm hover:bg-white shadow-md"
           onClick={handleWishlistToggle}
         >
-          <Heart 
+          <Heart
             className={`h-4 w-4 transition-colors ${
-              isInWishlist ? "text-red-500 fill-red-500" : "text-gray-600"
-            }`} 
+              isInWishlist ? "fill-red-500 text-red-500" : "text-gray-600 hover:text-red-500"
+            }`}
           />
         </Button>
+
+        {discountPercentage > 0 && (
+          <Badge className="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-red-600 text-white shadow-md">
+            {discountPercentage}% OFF
+          </Badge>
+        )}
+
+        <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+          <Button
+            onClick={handleAddToCart}
+            className="w-full btn-ali-primary text-sm py-2"
+          >
+            <ShoppingCart className="h-4 w-4 mr-2" />
+            Quick Add
+          </Button>
+        </div>
       </div>
 
-      <CardContent className="p-4">
-        <div onClick={handleProductClick}>
-          <h3 className="font-medium text-gray-900 mb-2 line-clamp-2 min-h-[3rem]">
-            {product.name}
-          </h3>
-          
-          <div className="flex items-center mb-2 gap-2">
-            {renderStars(product.rating || "0")}
-            <span className="text-gray-500 text-sm">({product.reviewCount})</span>
+      <CardContent className="p-5">
+        <h3 className="font-semibold text-base mb-3 line-clamp-2 group-hover:text-ali-orange transition-colors">{product.name}</h3>
+
+        <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className={`h-4 w-4 ${
+                  i < Math.floor(parseFloat(product.rating || "0"))
+                    ? "fill-yellow-400 text-yellow-400"
+                    : "fill-gray-200 text-gray-200"
+                }`}
+              />
+            ))}
           </div>
+          <span className="text-sm text-gray-600 font-medium">{product.rating}</span>
+          <span className="text-xs text-gray-400">({product.reviewCount} reviews)</span>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex flex-col">
-            <span className="text-ali-orange font-bold text-lg">
-              ${parseFloat(product.price).toFixed(2)}
+        <div className="flex items-baseline gap-2 mb-4">
+          <span className="font-bold text-xl text-gradient">
+            ${parseFloat(product.price).toFixed(2)}
+          </span>
+          {product.originalPrice && (
+            <span className="text-sm text-gray-500 line-through">
+              ${parseFloat(product.originalPrice).toFixed(2)}
             </span>
-            {product.originalPrice && (
-              <span className="text-gray-500 text-sm line-through">
-                ${parseFloat(product.originalPrice).toFixed(2)}
-              </span>
-            )}
+          )}
+        </div>
+
+        {product.stock && product.stock < 10 && (
+          <div className="mb-3">
+            <Badge variant="outline" className="status-warning text-xs">
+              Only {product.stock} left!
+            </Badge>
           </div>
-          
+        )}
+
+        <div className="space-y-2">
           <Button
             size="sm"
             className="bg-ali-orange hover:bg-ali-orange-dark text-white opacity-0 group-hover:opacity-100 transition-opacity"
