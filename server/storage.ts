@@ -109,8 +109,8 @@ export class MemStorage implements IStorage {
 
     // Seed users
     const usersData = [
-      { name: "Admin User", email: "ayatullahiayobami@gmail.com", role: "seller", firebaseUid: "admin123" },
-      { name: "John Seller", email: "seller@example.com", role: "seller", firebaseUid: "seller123" },
+      { name: "Admin User", email: "ayatullahiayobami@gmail.com", role: "seller", firebaseUid: "6bFy27AdM0cMCjOgyPPzHhbH0HN2" },
+      { name: "John Seller", email: "seller@example.com", role: "seller", firebaseUid: "tVu6FJ7RxoU4VGbtXb8SwTHulbe2" },
       { name: "Jane Customer", email: "customer@example.com", role: "customer", firebaseUid: "customer123" },
     ];
 
