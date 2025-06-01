@@ -84,7 +84,7 @@ export function ProductCard({ product, onProductClick }: ProductCardProps) {
   };
 
   return (
-    <Card className="card-enhanced group">
+    <Card className="card-enhanced group cursor-pointer" onClick={handleProductClick}>
       <div className="aspect-square relative overflow-hidden">
         <img
           src={product.images?.[0] || "/placeholder.svg"}
@@ -124,7 +124,7 @@ export function ProductCard({ product, onProductClick }: ProductCardProps) {
       </div>
 
       <CardContent className="p-5">
-        <h3 className="font-semibold text-base mb-3 line-clamp-2 group-hover:text-ali-orange transition-colors">{product.name}</h3>
+        <h3 className="font-semibold text-base mb-3 line-clamp-2 group-hover:text-ali-orange transition-colors cursor-pointer" onClick={handleProductClick}>{product.name}</h3>
 
         <div className="flex items-center gap-2 mb-3">
           <div className="flex items-center">
