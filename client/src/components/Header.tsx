@@ -159,9 +159,7 @@ export function Header({ onCartOpen, searchQuery, onSearchChange }: HeaderProps)
                   <DropdownMenuItem asChild>
                     <Link href="/seller">Seller Dashboard</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/admin">Admin Dashboard</Link>
-                  </DropdownMenuItem>
+                 
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleSignOut}>
                     Sign Out
