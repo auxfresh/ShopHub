@@ -265,7 +265,7 @@ export default function Home() {
                 <li>Returns & Refunds</li>
                 <li>Shipping Info</li>
                 <li>Contact Us</li>
-                </ul>
+              </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Categories</h4>
