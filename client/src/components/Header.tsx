@@ -88,9 +88,9 @@ export function Header({ onCartOpen, searchQuery, onSearchChange }: HeaderProps)
             </div>
           </div>
 
-          {/* Search Bar */}
-          <div className="flex-1 max-w-2xl mx-8">
-            <form onSubmit={handleSearch} className="relative">
+          {/* Search Bar - Hidden on mobile, shown on desktop */}
+          <div className="hidden md:flex flex-1 max-w-2xl mx-8">
+            <form onSubmit={handleSearch} className="relative w-full">
               <Input
                 type="text"
                 placeholder="Search for products..."
@@ -109,9 +109,14 @@ export function Header({ onCartOpen, searchQuery, onSearchChange }: HeaderProps)
           </div>
 
           {/* User Actions */}
-          <div className="flex items-center space-x-4">
-            {/* Wishlist */}
-            <Button variant="ghost" size="sm" className="relative" asChild>
+          <div className="flex items-center space-x-2 md:space-x-4">
+            {/* Mobile Search Button */}
+            <Button variant="ghost" size="sm" className="md:hidden">
+              <Search className="h-5 w-5" />
+            </Button>
+
+            {/* Wishlist - Hidden on mobile */}
+            <Button variant="ghost" size="sm" className="relative hidden md:flex" asChild>
               <Link href="/wishlist">
                 <Heart className="h-5 w-5" />
                 <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs bg-ali-orange">
@@ -141,7 +146,7 @@ export function Header({ onCartOpen, searchQuery, onSearchChange }: HeaderProps)
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="flex items-center space-x-2">
                     <User className="h-5 w-5" />
-                    <span className="hidden md:inline">Account</span>
+                    <span className="hidden lg:inline">Account</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
@@ -161,7 +166,7 @@ export function Header({ onCartOpen, searchQuery, onSearchChange }: HeaderProps)
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button asChild className="bg-ali-orange hover:bg-ali-orange-dark">
+              <Button asChild className="bg-ali-orange hover:bg-ali-orange-dark text-xs md:text-sm px-2 md:px-4">
                 <Link href="/auth">Sign In</Link>
               </Button>
             )}
@@ -175,6 +180,26 @@ export function Header({ onCartOpen, searchQuery, onSearchChange }: HeaderProps)
               </SheetTrigger>
               <SheetContent side="left" className="w-64">
                 <div className="py-4">
+                  {/* Mobile Search */}
+                  <div className="mb-6">
+                    <form onSubmit={handleSearch} className="relative">
+                      <Input
+                        type="text"
+                        placeholder="Search products..."
+                        value={searchQuery}
+                        onChange={(e) => onSearchChange(e.target.value)}
+                        className="w-full pl-4 pr-12 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ali-orange focus:border-ali-orange"
+                      />
+                      <Button 
+                        type="submit"
+                        size="sm"
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-ali-orange hover:bg-ali-orange-dark h-8 w-8 p-0"
+                      >
+                        <Search className="h-4 w-4" />
+                      </Button>
+                    </form>
+                  </div>
+
                   <h2 className="text-lg font-semibold mb-4">Categories</h2>
                   <div className="space-y-2">
                     {categories.map((category) => (

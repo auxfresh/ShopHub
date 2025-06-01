@@ -3,12 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
-import { CartSidebar } from "@/components/CartSidebar";
 import { FilterSidebar } from "@/components/FilterSidebar";
+import { CartSidebar } from "@/components/CartSidebar";
+import { BottomNavigation } from "@/components/BottomNavigation";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Filter, ChevronRight } from "lucide-react";
 import type { Product, Category } from "@shared/schema";
 
 export default function Home() {
@@ -103,7 +104,7 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-16 md:pb-0">
       <Header 
         onCartOpen={() => setCartOpen(true)}
         searchQuery={searchQuery}
@@ -305,6 +306,7 @@ export default function Home() {
       </footer>
 
       <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} />
+      <BottomNavigation onCartOpen={() => setCartOpen(true)} />
     </div>
   );
 }
