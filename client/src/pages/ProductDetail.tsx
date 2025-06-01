@@ -530,7 +530,7 @@ export default function ProductDetail() {
                   )}
                 </div>
               </TabsContent>
-            </Tabs>
+            </CardContent>
           </Tabs>
         </Card>
 

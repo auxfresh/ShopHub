@@ -115,6 +115,7 @@ export class MemStorage implements IStorage {
         reviewCount: 127,
         stock: 50,
         tags: ["wireless", "noise-cancellation", "premium"],
+        specifications: {},
       },
       {
         name: "Gaming Laptop 15.6\" RTX Graphics",
@@ -510,10 +511,20 @@ export class MemStorage implements IStorage {
     productsData.forEach(prod => {
       const product: Product = {
         id: this.currentProductId++,
-        ...prod,
+        name: prod.name,
+        description: prod.description,
+        price: prod.price,
+        originalPrice: prod.originalPrice || null,
+        categoryId: prod.categoryId,
+        sellerId: prod.sellerId,
+        images: prod.images,
+        rating: prod.rating || null,
+        reviewCount: prod.reviewCount || 0,
+        stock: prod.stock,
+        tags: prod.tags || null,
         isActive: true,
         isFeatured: prod.isFeatured || false,
-        specifications: {},
+        specifications: prod.specifications || null,
         createdAt: new Date(),
       };
       this.products.set(product.id, product);
@@ -536,7 +547,10 @@ export class MemStorage implements IStorage {
   async createUser(insertUser: InsertUser): Promise<User> {
     const user: User = {
       id: this.currentUserId++,
-      ...insertUser,
+      name: insertUser.name,
+      email: insertUser.email,
+      role: insertUser.role || "customer",
+      firebaseUid: insertUser.firebaseUid,
       createdAt: new Date(),
     };
     this.users.set(user.id, user);
@@ -564,7 +578,9 @@ export class MemStorage implements IStorage {
   async createCategory(insertCategory: InsertCategory): Promise<Category> {
     const category: Category = {
       id: this.currentCategoryId++,
-      ...insertCategory,
+      name: insertCategory.name,
+      slug: insertCategory.slug,
+      icon: insertCategory.icon || null,
     };
     this.categories.set(category.id, category);
     return category;
