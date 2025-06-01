@@ -44,7 +44,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const addToCartMutation = useMutation({
     mutationFn: async ({ productId, quantity = 1 }: { productId: number; quantity?: number }) => {
-      if (!firebaseUser) throw new Error("Please sign in to add items to cart");
+      if (!firebaseUser) throw new Error("Authentication required");
       
       const response = await fetch("/api/cart", {
         method: "POST",
@@ -57,8 +57,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       });
       
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || "Failed to add item to cart");
+        throw new Error("Failed to add item to cart");
       }
       
       return response.json();
@@ -178,14 +177,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const addToCart = async (productId: number, quantity = 1) => {
-    if (!firebaseUser) {
-      toast({
-        title: "Authentication Required",
-        description: "Please sign in to add items to cart",
-        variant: "destructive",
-      });
-      return;
-    }
     await addToCartMutation.mutateAsync({ productId, quantity });
   };
 

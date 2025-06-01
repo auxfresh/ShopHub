@@ -7,7 +7,6 @@ import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
 import { useLocation } from "wouter";
 import type { Product } from "@shared/schema";
-import { toast } from "@/components/ui/use-toast"
 
 interface ProductCardProps {
   product: Product;
@@ -23,19 +22,18 @@ export function ProductCard({ product, onProductClick }: ProductCardProps) {
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.stopPropagation();
+
     if (!firebaseUser) {
-      toast({
-        title: "Authentication Required",
-        description: "Please sign in to add items to cart",
-        action: (
-          <Button variant="outline" size="sm" onClick={() => setLocation("/auth")}>
-            Sign In
-          </Button>
-        ),
-      });
+      setLocation("/auth");
       return;
     }
-    await addToCart(product.id, 1);
+
+    setIsAddingToCart(true);
+    try {
+      await addToCart(product.id);
+    } finally {
+      setIsAddingToCart(false);
+    }
   };
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
