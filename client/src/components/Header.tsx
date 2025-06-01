@@ -62,7 +62,7 @@ export function Header({ onCartOpen, searchQuery, onSearchChange }: HeaderProps)
           {/* Logo */}
           <div className="flex items-center space-x-4">
             <Link href="/">
-              <h1 className="text-2xl font-bold text-ali-orange cursor-pointer">AliMart</h1>
+              <h1 className="text-2xl font-bold text-ali-orange cursor-pointer">Shop Hub</h1>
             </Link>
 
             {/* Desktop Categories */}
