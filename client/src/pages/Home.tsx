@@ -9,7 +9,6 @@ import { BottomNavigation } from "@/components/BottomNavigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Filter, ChevronRight } from "lucide-react";
 import type { Product, Category } from "@shared/schema";
@@ -171,18 +170,17 @@ export default function Home() {
                   </div>
                   <div className="flex items-center space-x-4">
                     <span className="text-gray-600">Sort by:</span>
-                    <Select value={filters.sortBy} onValueChange={handleSortChange}>
-                      <SelectTrigger className="w-48">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="best_match">Best Match</SelectItem>
-                        <SelectItem value="price_asc">Price: Low to High</SelectItem>
-                        <SelectItem value="price_desc">Price: High to Low</SelectItem>
-                        <SelectItem value="rating">Customer Rating</SelectItem>
-                        <SelectItem value="newest">Newest</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <select 
+                      value={filters.sortBy} 
+                      onChange={(e) => handleSortChange(e.target.value)}
+                      className="w-48 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ali-orange focus:border-ali-orange"
+                    >
+                      <option value="best_match">Best Match</option>
+                      <option value="price_asc">Price: Low to High</option>
+                      <option value="price_desc">Price: High to Low</option>
+                      <option value="rating">Customer Rating</option>
+                      <option value="newest">Newest Arrivals</option>
+                    </select>
                   </div>
                 </div>
               </CardContent>
@@ -267,7 +265,7 @@ export default function Home() {
                 <li>Returns & Refunds</li>
                 <li>Shipping Info</li>
                 <li>Contact Us</li>
-              </ul>
+                </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Categories</h4>
@@ -312,3 +310,4 @@ export default function Home() {
     </div>
   );
 }
+```This change simplifies the sort by dropdown by replacing the Radix UI Select component with a native HTML select element.

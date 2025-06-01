@@ -34,9 +34,9 @@ export function BottomNavigation({ onCartOpen }: BottomNavigationProps) {
         </Link>
 
         {/* Products/Search */}
-        <Link href="/?search=">
+        <Link href="/">
           <button className={`flex flex-col items-center p-2 min-w-[60px] ${
-            location.includes("search=") ? "text-ali-orange" : "text-gray-600"
+            location === "/" || location.includes("search=") || location.includes("category=") ? "text-ali-orange" : "text-gray-600"
           }`}>
             <Search className="h-5 w-5" />
             <span className="text-xs mt-1">Products</span>

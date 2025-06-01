@@ -8,6 +8,7 @@ import { CartProvider } from "@/hooks/useCart";
 import Home from "@/pages/Home";
 import ProductDetail from "@/pages/ProductDetail";
 import Auth from "@/pages/Auth";
+import Profile from "@/pages/Profile";
 import SellerDashboard from "@/pages/SellerDashboard";
 import AdminPanel from "@/pages/AdminPanel";
 import NotFound from "@/pages/not-found";
@@ -18,9 +19,9 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/product/:id" component={ProductDetail} />
       <Route path="/auth" component={Auth} />
+      <Route path="/profile" component={Profile} />
       <Route path="/seller" component={SellerDashboard} />
       <Route path="/admin" component={AdminPanel} />
-      <Route path="/profile" component={() => <div>Profile Page - Coming Soon</div>} />
       <Route path="/orders" component={() => <div>Orders Page - Coming Soon</div>} />
       <Route path="/wishlist" component={() => <div>Wishlist Page - Coming Soon</div>} />
       <Route path="/checkout" component={() => <div>Checkout Page - Coming Soon</div>} />
