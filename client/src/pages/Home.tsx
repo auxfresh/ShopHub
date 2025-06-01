@@ -310,4 +310,3 @@ export default function Home() {
     </div>
   );
 }
-```This change simplifies the sort by dropdown by replacing the Radix UI Select component with a native HTML select element.
