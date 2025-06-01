@@ -24,7 +24,7 @@ export function BottomNavigation({ onCartOpen }: BottomNavigationProps) {
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 md:hidden">
       <div className="flex items-center justify-around py-2">
         {/* Home */}
-        <Link href="/">
+        <Link href="/admin">
           <button className={`flex flex-col items-center p-2 min-w-[60px] ${
             isActive("/") ? "text-ali-orange" : "text-gray-600"
           }`}>
